@@ -10,9 +10,6 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 sns.set('paper', style="whitegrid")
-#sns.set('paper', style="white")
-
-import IPython
 
 DATA_LOC = "./data"
 SAVE_LOC = "./graphs"
