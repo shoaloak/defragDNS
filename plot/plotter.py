@@ -10,6 +10,9 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 sns.set('paper', style="whitegrid")
+#sns.set('paper', style="white")
+
+import IPython
 
 DATA_LOC = "./data"
 SAVE_LOC = "./graphs"
@@ -81,12 +84,20 @@ def process_data(data, mtu):
 # https://stackoverflow.com/questions/43214978/seaborn-barplot-displaying-values
 def show_values_on_bars(axs):
     def _show_on_single_plot(ax):        
-        #IPython.embed()
+        one_percent_graph = ax.get_ylim()[1] / 100
+
         for bar, line in zip(ax.patches, ax.lines):
+            # center x bar
             _x = bar.get_x() + bar.get_width() / 2
-            _y = line._y[1] + ax.get_ylim()[1] / 100
+            # just above stdev
+            _y = line._y[1] + one_percent_graph
+
+            if np.isnan(_y):
+                # no stdev
+                _y = bar.get_y() + bar.get_height() + one_percent_graph
+            
             value = '{:.2f}%'.format(bar.get_height())
-            ax.text(_x, _y, value, ha="center") 
+            ax.text(_x, _y, value, ha="center", fontsize=8) 
 
     if isinstance(axs, np.ndarray):
         for idx, ax in np.ndenumerate(axs):
@@ -96,6 +107,9 @@ def show_values_on_bars(axs):
 
 def create_graph(df):
     mtus = df['mtu'].unique()
+    mtus.sort()
+    mtus = mtus[::-1]
+
     for ip in ['ipv4', 'ipv6']:
         for rslv in ['stub', 'rslv']:
             # colors
