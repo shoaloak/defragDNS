@@ -96,7 +96,7 @@ def show_values_on_bars(axs):
                 # no stdev
                 _y = bar.get_y() + bar.get_height() + one_percent_graph
             
-            value = '{:.2f}%'.format(bar.get_height())
+            value = '{:.2f}'.format(bar.get_height())
             ax.text(_x, _y, value, ha="center", fontsize=8) 
 
     if isinstance(axs, np.ndarray):
