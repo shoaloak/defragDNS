@@ -6,3 +6,9 @@ This is for calculating the optimal PMTU.
 
 ## plot
 The plot folder contains scrips to generate graphs.
+
+# requirements
+```
+pyasn_util_download.py --latest
+pyasn_util_convert.py --single *.bz2 asn.dat
+```

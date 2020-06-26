@@ -106,18 +106,20 @@ def show_values_on_bars(axs):
         _show_on_single_plot(axs)
 
 def create_graph(df):
-    mtus = df['mtu'].unique()
-    mtus.sort()
-    mtus = mtus[::-1]
-
     for ip in ['ipv4', 'ipv6']:
+        mtu = 'mtu4' if ip == 'ipv4' else 'mtu6'
+
+        mtus = df[mtu].unique()
+        mtus.sort()
+        mtus = mtus[::-1]
+
         for rslv in ['stub', 'rslv']:
             # colors
             #ax = sns.barplot(x='mtu', y=f'%failed_queries_{ip}_{rslv}',
             #                 data=df, order=mtus, ci='sd', errcolor="red",
             #                 palette=sns.color_palette("cubehelix"))
 
-            ax = sns.barplot(x='mtu', y=f'%failed_queries_{ip}_{rslv}',
+            ax = sns.barplot(x=mtu, y=f'%failed_queries_{ip}_{rslv}',
                              data=df, order=mtus, ci='sd', 
                              facecolor=(0.9295040369088812, 0.9295040369088812,
                                         0.9295040369088812),

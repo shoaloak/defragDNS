@@ -4,6 +4,8 @@ import correlate_ids as corr
 import json
 import sys
 import argparse
+import pyasn
+asndb = pyasn.pyasn('asn.dat')
 
 def stub_process(fetch_args, ip):
     #print(f"fetching Atlas from {fetch_args.start} till {fetch_args.stop}")
@@ -75,6 +77,8 @@ def rslv_process(args, ip):
 
     results = merged_df[~check_arr]
 
+    #import IPython; IPython.embed()
+
     #total_queries = len(merged_df)
     total_queries = fetch.get_no_queries(args)
     failed_queries = len(results)
@@ -95,20 +99,23 @@ def main(args):
     stub = {4:25741785,6:25741786}
     rslv = {4:25741787,6:25741788}
 
-    for i in range(0, 24):
+    #for i in range(0, 24):
+    #for i in range(9, 24):
+    for i in range(22, 23):
         fetch_args.start = bfmt.format(str(i).zfill(2))
         fetch_args.stop = efmt.format(str(i).zfill(2))
         output = {'datetime':fetch_args.start}
 
         fetch_args.id = stub[4]
         stub4_result, mtu = stub_process(fetch_args, 4)
-        output['mtu'] = mtu
+        output['mtu4'] = mtu
         output['total_queries_ipv4_stub'] = stub4_result[0]
         output['failed_queries_ipv4_stub'] = stub4_result[1]
         output['%failed_queries_ipv4_stub'] = stub4_result[2]
 
         fetch_args.id = stub[6]
         stub6_result, mtu = stub_process(fetch_args, 6)
+        output['mtu6'] = mtu
         output['total_queries_ipv6_stub'] = stub6_result[0]
         output['failed_queries_ipv6_stub'] = stub6_result[1]
         output['%failed_queries_ipv6_stub'] = stub6_result[2]
