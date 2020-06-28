@@ -4,8 +4,7 @@ import correlate_ids as corr
 import json
 import sys
 import argparse
-import pyasn
-asndb = pyasn.pyasn('asn.dat')
+#import pickle
 
 def stub_process(fetch_args, ip):
     #print(f"fetching Atlas from {fetch_args.start} till {fetch_args.stop}")
@@ -84,6 +83,9 @@ def rslv_process(args, ip):
     failed_queries = len(results)
     percent_failed = round((100 / total_queries) * failed_queries, 2)
 
+    #with open(f'./dfs/rslv_{args.start}.pkl', 'wb') as f:
+    #    pickle.dump(results, f)
+
     return [total_queries, failed_queries, percent_failed]
 
     #ret = {"failed_queries": results.shape[0]}
@@ -99,9 +101,8 @@ def main(args):
     stub = {4:25741785,6:25741786}
     rslv = {4:25741787,6:25741788}
 
-    #for i in range(0, 24):
-    #for i in range(9, 24):
-    for i in range(22, 23):
+    for i in range(0, 24):
+    #for i in range(10, 11):
         fetch_args.start = bfmt.format(str(i).zfill(2))
         fetch_args.stop = efmt.format(str(i).zfill(2))
         output = {'datetime':fetch_args.start}
