@@ -83,8 +83,8 @@ def rslv_process(args, ip):
     failed_queries = len(results)
     percent_failed = round((100 / total_queries) * failed_queries, 2)
 
-    #with open(f'./dfs/rslv_{args.start}.pkl', 'wb') as f:
-    #    pickle.dump(results, f)
+ #   with open(f'./dfs/ipv4/rslv_{args.start}.pkl', 'wb') as f:
+ #       pickle.dump(results, f)
 
     return [total_queries, failed_queries, percent_failed]
 
@@ -102,7 +102,7 @@ def main(args):
     rslv = {4:25741787,6:25741788}
 
     for i in range(0, 24):
-    #for i in range(10, 11):
+  #  for i in range(0, 11):
         fetch_args.start = bfmt.format(str(i).zfill(2))
         fetch_args.stop = efmt.format(str(i).zfill(2))
         output = {'datetime':fetch_args.start}
