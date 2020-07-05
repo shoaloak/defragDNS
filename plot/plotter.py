@@ -128,7 +128,7 @@ def create_graph(df):
             show_values_on_bars(ax)
             ax.set(xlabel='MTU size', ylabel='Percentage failed DNS UDP queries')
 
-            #plt.savefig(join(SAVE_LOC, f'{ip}_{rslv}.png'), format='png')
+            plt.savefig(join(SAVE_LOC, f'{ip}_{rslv}.png'), format='png')
             plt.savefig(join(SAVE_LOC, f'{ip}_{rslv}.eps'), format='eps')
             #plt.show()
             #sys.exit(0)

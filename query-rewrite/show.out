@@ -1,0 +1,10 @@
+make[1]: Entering directory '/root/ron2020/code/query-rewrite'
+# see if loaded, xdpgeneric incoming and tc filter outgoing
+/usr/sbin/ip link show dev eth0
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 xdpgeneric qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether ee:f7:1a:04:5a:af brd ff:ff:ff:ff:ff:ff
+    prog/xdp id 1037 tag b7618840ee0b468b jited 
+/usr/sbin/tc filter show dev eth0 egress
+filter protocol all pref 49152 bpf chain 0 
+filter protocol all pref 49152 bpf chain 0 handle 0x1 xdp_query_rewrite_kern.o:[tc-restore-qname] direct-action not_in_hw id 1038 tag 8dd36906568320b0 jited 
+make[1]: Leaving directory '/root/ron2020/code/query-rewrite'

@@ -1,0 +1,1 @@
+-O2 -Wall -Werror -Wno-unused -I ../libbpf/src -DMTU4=1416 -DMTU4_STR="1416" -DMTU6=1340 -DMTU6_STR="1340"
