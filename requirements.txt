@@ -12,7 +12,7 @@ python-dateutil==2.8.1
 pytz==2020.1
 requests==2.31.0
 ripe.atlas.cousteau==1.4.2
-scipy==1.5.0
+scipy==1.10.0
 seaborn==0.10.1
 six==1.15.0
 socketIO-client==0.7.2
